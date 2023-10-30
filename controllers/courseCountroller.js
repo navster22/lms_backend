@@ -43,6 +43,23 @@ const getCourses = (req,res) => {
     })
 }
 
+const getAllCourses = (req,res) => {
+    Courses.find()
+    .then(result => {
+        return res.status(200).json({
+            status: 200,
+            message: "Courses fetched successfully",
+            data: result
+        })
+    })
+    .catch(err => {
+        return res.status(500).json({
+            status: 500,
+            message: "Bad request"
+        })
+    })
+}
+
 const getCourse = (req,res) => {
     console.log(req.session.user)
     const course_id = req.params.course_id
@@ -92,5 +109,6 @@ module.exports = {
     createCourse,
     getCourses,
     updateCourse,
-    getCourse
+    getCourse,
+    getAllCourses
 }
